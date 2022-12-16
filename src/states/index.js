@@ -1,14 +1,12 @@
-
+import createSagaMiddleware from 'redux-saga'
 import { configureStore } from '@reduxjs/toolkit'
 import { initMessageListener } from 'redux-state-sync'
-import { loadState, saveState } from './locale'
-import mapReducer from './maps/reducer'
+import mapReducer from './mapState'
+import mapSaga from './mapSaga'
 
 // const config = {}
 
 // const middlewares = [createStateSyncMiddleware(config)]
-
-const persistedState = loadState()
 
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -17,14 +15,16 @@ const persistedState = loadState()
 //   // other store enhancers if any
 // )
 
-const store = configureStore({
-  reducer:
-    mapReducer,
-  preloadedState: persistedState
+const saga = createSagaMiddleware()
 
+const store = configureStore({
+  reducer: {
+    maps: mapReducer
+  },
+  middleware: [saga]
 })
 
-store.subscribe(() => { saveState(store.getState()) })
+saga.run(mapSaga)
 
 initMessageListener(store)
 

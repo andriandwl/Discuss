@@ -1,12 +1,12 @@
-import { Box, CardContent, Divider, Grid, InputBase, Paper, Typography } from '@mui/material'
+import { Box, Divider, Grid, InputBase, Paper, Typography } from '@mui/material'
 import { Autocomplete, GoogleMap, LoadScript } from '@react-google-maps/api'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addHistory, setAutocompleteValue, setMapCenter, setZoom } from '../states/maps/action'
 import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
 import DirectionsIcon from '@mui/icons-material/Directions'
 import { apiKey, loadScriptPlaces, mapContainerStyle } from './constants'
+import { getAutoCompleteValueSuccess, getHistorySuccess, getMapCenterSuccess, getZoomSuccess } from '../states/mapState'
 
 function Maps () {
   const dispatch = useDispatch()
@@ -15,7 +15,10 @@ function Maps () {
   const [autocomplete, setAutocomplete] = useState(null)
   const [inputValue, setInputValue] = useState('')
 
-  const { mapCenter, autocompleteValue, zoom, history } = useSelector((states) => states)
+  const mapCenter = useSelector(state => state.maps.mapCenter)
+  const autocompleteValue = useSelector(state => state.maps.autocomplete)
+  const zoom = useSelector(state => state.maps.zoom)
+  const history = useSelector(state => state.maps.history)
 
   const onAutoCompleteLoad = autocomplete => {
     setAutocomplete(autocomplete)
@@ -28,16 +31,17 @@ function Maps () {
   const onAutocompletePlaceChanged = () => {
     if (autocomplete !== null) {
       const autocompletePlace = autocomplete.getPlace()
+      console.log(autocompletePlace)
       if (autocompletePlace.geometry) {
         const currentCoordinates = {
           lat: autocompletePlace.geometry.location.lat(),
           lng: autocompletePlace.geometry.location.lng()
         }
-        dispatch(setMapCenter(currentCoordinates))
-        dispatch(setAutocompleteValue(autocompletePlace.formatted_address))
+        dispatch(getMapCenterSuccess(currentCoordinates))
+        dispatch(getAutoCompleteValueSuccess(autocompletePlace.formatted_address))
         // dispatch(addHistory(autocompletePlace.formatted_address))
         setInputValue(autocompletePlace.formatted_address)
-        dispatch(addHistory(autocompletePlace.formatted_address))
+        dispatch(getHistorySuccess(autocompletePlace.formatted_address))
         console.log(history)
       } else {
         console.log('No location selected')
@@ -48,19 +52,19 @@ function Maps () {
   }
   const onMapZoomChanged = () => {
     if (map) {
-      dispatch(setZoom(map.getZoom()))
+      dispatch(getZoomSuccess(map.getZoom()))
     }
   }
 
   const onMapDragEnd = () => {
     if (map) {
       const center = { lat: map.getCenter().lat(), lng: map.getCenter().lng() }
-      dispatch(setMapCenter(center))
+      dispatch(getMapCenterSuccess(center))
     }
   }
 
   const onInputChange = (event) => {
-    dispatch(setAutocompleteValue(''))
+    dispatch(getAutoCompleteValueSuccess(''))
     setInputValue(event.target.value)
   }
 
@@ -139,21 +143,7 @@ function Maps () {
           History Search
         </Typography>
         <Box>
-          {
-            history.map((historie) => {
-              return (
-                <CardContent variant="outline" key={historie} sx={{
-                  border: '1px solid black'
-                }}>
-                  <Typography variant="h8" gutterBottom sx={{
-                    mt: 3
-                  }}>
-                    {historie}
-                  </Typography>
-                </CardContent>
-              )
-            })
-          }
+
         </Box>
       </Grid>
       </LoadScript>
