@@ -134,7 +134,7 @@ function Maps () {
             </Autocomplete>
         </Box>
         <Typography variant="h6" gutterBottom sx={{
-          mt: 3
+          mt: 15
         }}>
           History Search
         </Typography>
