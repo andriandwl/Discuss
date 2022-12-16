@@ -8,36 +8,29 @@ const ActionType = {
 function setMapCenter (mapCenter) {
   return {
     type: ActionType.SET_MAP_CENTER,
-    payload: {
-      mapCenter
-    }
+    mapCenter
   }
 }
 
 function setAutocompleteValue (autocompleteValue) {
   return {
     type: ActionType.SET_AUTOCOMPLETE_VALUE,
-    payload: {
-      autocompleteValue
-    }
+    autocompleteValue
+
   }
 }
 
 function setZoom (zoom) {
   return {
     type: ActionType.SET_ZOOM,
-    payload: {
-      zoom
-    }
+    zoom
   }
 }
 
 function setHistory (history) {
   return {
     type: ActionType.SET_HISTORY,
-    payload: {
-      history
-    }
+    history
   }
 }
 

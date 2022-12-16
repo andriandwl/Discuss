@@ -38,7 +38,6 @@ function Maps () {
         dispatch(setHistory(autocompletePlace.formatted_address))
         // dispatch(addHistory(autocompletePlace.formatted_address))
         setInputValue(autocompletePlace.formatted_address)
-        console.log(history)
       } else {
         console.log('No location selected')
       }
