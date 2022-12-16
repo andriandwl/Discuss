@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, InputBase, Paper, Typography } from '@mui/material'
+import { Box, CardContent, Divider, Grid, InputBase, Paper, Typography } from '@mui/material'
 import { Autocomplete, GoogleMap, LoadScript } from '@react-google-maps/api'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -143,7 +143,21 @@ function Maps () {
           History Search
         </Typography>
         <Box>
-
+        {
+          history.map((historie) => {
+            return (
+              <CardContent variant="outline" key={historie} sx={{
+                border: '1px solid black'
+              }}>
+                <Typography variant="h8" gutterBottom sx={{
+                  mt: 3
+                }}>
+                  {historie}
+                </Typography>
+              </CardContent>
+            )
+          })
+        }
         </Box>
       </Grid>
       </LoadScript>

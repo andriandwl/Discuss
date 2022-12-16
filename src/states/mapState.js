@@ -39,7 +39,7 @@ export const mapSlice = createSlice({
       state.isLoading = false
     },
     getHistorySuccess: (state, action) => {
-      state.history = action.payload
+      state.history = [...state.history, action.payload]
     },
     getHistoryFailure: (state) => {
       state.isLoading = false
