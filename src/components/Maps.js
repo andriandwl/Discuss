@@ -1,8 +1,8 @@
-import { Box, Divider, Grid, InputBase, Paper, Typography } from '@mui/material'
+import { Box, CardContent, Divider, Grid, InputBase, Paper, Typography } from '@mui/material'
 import { Autocomplete, GoogleMap, LoadScript } from '@react-google-maps/api'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAutocompleteValue, setHistory, setMapCenter, setZoom } from '../states/maps/action'
+import { addHistory, setAutocompleteValue, setMapCenter, setZoom } from '../states/maps/action'
 import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
 import DirectionsIcon from '@mui/icons-material/Directions'
@@ -35,9 +35,10 @@ function Maps () {
         }
         dispatch(setMapCenter(currentCoordinates))
         dispatch(setAutocompleteValue(autocompletePlace.formatted_address))
-        dispatch(setHistory(autocompletePlace.formatted_address))
         // dispatch(addHistory(autocompletePlace.formatted_address))
         setInputValue(autocompletePlace.formatted_address)
+        dispatch(addHistory(autocompletePlace.formatted_address))
+        console.log(history)
       } else {
         console.log('No location selected')
       }
@@ -131,6 +132,28 @@ function Maps () {
               </IconButton>
             </Paper>
             </Autocomplete>
+        </Box>
+        <Typography variant="h6" gutterBottom sx={{
+          mt: 3
+        }}>
+          History Search
+        </Typography>
+        <Box>
+          {
+            history.map((historie) => {
+              return (
+                <CardContent variant="outline" key={historie} sx={{
+                  border: '1px solid black'
+                }}>
+                  <Typography variant="h8" gutterBottom sx={{
+                    mt: 3
+                  }}>
+                    {historie}
+                  </Typography>
+                </CardContent>
+              )
+            })
+          }
         </Box>
       </Grid>
       </LoadScript>

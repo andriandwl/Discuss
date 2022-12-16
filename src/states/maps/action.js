@@ -2,7 +2,7 @@ const ActionType = {
   SET_MAP_CENTER: 'SET_MAP_CENTER',
   SET_AUTOCOMPLETE_VALUE: 'SET_AUTOCOMPLETE_VALUE',
   SET_ZOOM: 'SET_ZOOM',
-  SET_HISTORY: 'SET_HISTORY'
+  ADD_HISTORY: 'ADD_HISTORY'
 }
 
 function setMapCenter (mapCenter) {
@@ -27,9 +27,9 @@ function setZoom (zoom) {
   }
 }
 
-function setHistory (history) {
+function addHistory (history) {
   return {
-    type: ActionType.SET_HISTORY,
+    type: ActionType.ADD_HISTORY,
     history
   }
 }
@@ -65,6 +65,6 @@ function asyncSetZoom (zoom) {
 }
 
 export {
-  ActionType, setMapCenter, setAutocompleteValue,
-  setZoom, asyncSetAutocompleteValue, asyncSetZoom, asyncSetMapCenter, setHistory
+  ActionType, setMapCenter, setAutocompleteValue, addHistory,
+  setZoom, asyncSetAutocompleteValue, asyncSetZoom, asyncSetMapCenter
 }

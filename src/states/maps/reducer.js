@@ -16,9 +16,9 @@ const mapReducer = (state = loadState(), action) => {
       const { zoom } = action
       return { ...state, zoom }
     }
-    case ActionType.SET_HISTORY: {
+    case ActionType.ADD_HISTORY: {
       const { history } = action
-      return { ...state, history }
+      return { ...state, history: [...state.history, history] }
     }
     default:
       return { ...state }
