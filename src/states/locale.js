@@ -1,12 +1,12 @@
 const dummy = {
-    mapCenter: {
+  mapCenter: {
     lat: -1.2884,
     lng: 36.8233
   },
   autocompleteValue: '',
   zoom: 10,
   customMarkersArray: [],
-  history : []
+  history: []
 }
 
 export const loadState = () => {

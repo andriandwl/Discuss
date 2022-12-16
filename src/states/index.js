@@ -1,7 +1,7 @@
 
-import { configureStore } from "@reduxjs/toolkit"
-import {  initMessageListener } from "redux-state-sync"
-import { loadState, saveState } from "./locale"
+import { configureStore } from '@reduxjs/toolkit'
+import { initMessageListener } from 'redux-state-sync'
+import { loadState, saveState } from './locale'
 import mapReducer from './maps/reducer'
 
 // const config = {}
@@ -18,9 +18,9 @@ const persistedState = loadState()
 // )
 
 const store = configureStore({
-  reducer :
+  reducer:
     mapReducer,
-  preloadedState: persistedState,
+  preloadedState: persistedState
 
 })
 

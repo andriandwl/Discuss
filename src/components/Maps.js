@@ -15,7 +15,7 @@ function Maps () {
   const [autocomplete, setAutocomplete] = useState(null)
   const [inputValue, setInputValue] = useState('')
 
-  const { mapCenter, autocompleteValue, zoom, history} = useSelector((states) => states)
+  const { mapCenter, autocompleteValue, zoom, history } = useSelector((states) => states)
 
   const onAutoCompleteLoad = autocomplete => {
     setAutocomplete(autocomplete)
@@ -29,9 +29,9 @@ function Maps () {
     if (autocomplete !== null) {
       const autocompletePlace = autocomplete.getPlace()
       if (autocompletePlace.geometry) {
-        const currentCoordinates = { 
-          lat: autocompletePlace.geometry.location.lat(), 
-          lng: autocompletePlace.geometry.location.lng() 
+        const currentCoordinates = {
+          lat: autocompletePlace.geometry.location.lat(),
+          lng: autocompletePlace.geometry.location.lng()
         }
         dispatch(setMapCenter(currentCoordinates))
         dispatch(setAutocompleteValue(autocompletePlace.formatted_address))
@@ -98,7 +98,7 @@ function Maps () {
         align="center"
         >
           <Typography variant="h6" gutterBottom sx={{
-            mt:3
+            mt: 3
           }}>
             Assignment
           </Typography>
