@@ -5,19 +5,19 @@ import { ActionType } from './action'
 const mapReducer = (state = loadState(), action) => {
   switch (action.type) {
     case ActionType.SET_MAP_CENTER: {
-      const { mapCenter } = action
+      const { mapCenter } = action.payload.mapCenter
       return { ...state, mapCenter }
     }
     case ActionType.SET_AUTOCOMPLETE_VALUE: {
-      const { autocompleteValue } = action
+      const { autocompleteValue } = action.payload.autocompleteValue
       return { ...state, autocompleteValue }
     }
     case ActionType.SET_ZOOM: {
-      const { zoom } = action
+      const { zoom } = action.payload.zoom
       return { ...state, zoom }
     }
     case ActionType.SET_HISTORY: {
-      const { history } = action
+      const { history } = action.payload.history
       return { ...state, history }
     }
     default:
