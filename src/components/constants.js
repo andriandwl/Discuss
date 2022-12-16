@@ -6,5 +6,5 @@ module.exports = {
   },
   loadScriptPlaces: ['places'],
   infoBoxOptions: { closeBoxURL: '', enableEventPropagation: false },
-  apiKey: 'AIzaSyCSNW7Pt4PQZ7qxeT6rrTAQoBqpcw51KBE'
+  apiKey: 'AIzaSyDnSgK8Jtsmn87Qoc6Rrgq3sExfz_sK-DE'
 }
